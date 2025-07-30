@@ -1,0 +1,74 @@
+:root{
+  --brand:#06c197;
+  --brand-2:#04b78d;
+  --on-brand:#fff;
+  --shadow:0 10px 24px rgba(0,0,0,.08);
+}
+.site-header{position:sticky;top:0;z-index:1000;background:var(--brand);color:var(--on-brand);}
+.site-header .wrap{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:28px;}
+.logo{display:inline-block;padding:18px 0;font:800 18px/1 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#fff;text-decoration:none}
+.primary .menu{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:34px}
+.menu-btn,.menu-link{
+  border:0;background:none;cursor:pointer;
+  font:700 15px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-variant:small-caps;letter-spacing:.04em;
+  color:#fff;padding:22px 0;text-decoration:none;white-space:nowrap
+}
+.menu-btn:focus-visible,.menu-link:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.menuitem.right{margin-left:auto}
+.menuitem.language .menu-link{padding:14px 0}
+/* Search button */
+.search-btn{width:38px;height:38px;border-radius:999px;border:2px solid #fff;display:grid;place-items:center;background:transparent;color:#fff;margin-block:6px;cursor:pointer}
+.search-btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.donate{background:#fff;color:var(--brand);border-radius:999px;font-weight:800;line-height:1;text-decoration:none}
+.donate.small{padding:8px 14px;font-size:14px}
+.subnav{position:relative;height:0}
+.subnav-inner{position:absolute;left:0;right:0;transform:translateY(-8px);opacity:0;pointer-events:none;transition:transform .18s ease,opacity .18s ease;background:var(--brand);border-top:1px solid rgba(255,255,255,.65);box-shadow:var(--shadow)}
+.subnav.show .subnav-inner{transform:translateY(0);opacity:1;pointer-events:auto}
+.subnav .arrow{position:absolute;top:-9px;width:18px;height:18px;transform:rotate(45deg);background:var(--brand);left:var(--arrow-left,0px);border-left:1px solid rgba(255,255,255,.65);border-top:1px solid rgba(255,255,255,.65)}
+.subnav .panel{display:none;gap:28px;align-items:center;padding:14px 24px 16px}
+.subnav .panel[aria-hidden="false"]{display:flex}
+.subnav a{color:rgba(255,255,255,.98);text-decoration:none;font-weight:700}
+.subnav a:hover{text-decoration:underline}
+.menu-btn::after,.menu-link::after{content:"";display:block;height:2px;background:#fff;opacity:0;transform:scaleX(.2);transition:opacity .18s ease,transform .18s ease;margin-top:18px}
+.menuitem:hover .menu-btn::after,.menuitem:focus-within .menu-btn::after,.menuitem:hover .menu-link::after,.menuitem:focus-within .menu-link::after{opacity:1;transform:scaleX(1)}
+@media (max-width:960px){
+  .primary .menu{flex-wrap:wrap;gap:18px}
+  .menuitem.right{order:98}
+  .menuitem.search{order:99}
+  .subnav .arrow{display:none}
+  .subnav .panel{flex-wrap:wrap;row-gap:10px}
+}
+
+/* --- tweak donate pill size & active colour --- */
+.donate.small{
+  padding:6px 12px;    /* smaller pill */
+  font-size:13px;
+}
+/* On click/active change text colour to brand green */
+.donate.small:active,
+.donate.small:focus{
+  color:var(--brand) !important;
+}
+
+/* --- Donate pill: active/current page gets green text for visibility on orange bg --- */
+.donate.small[aria-current="page"],
+.donate.small.active,
+.menuitem.current .donate.small{
+    color: var(--brand) !important;
+}
+
+/* === Ensure Donate link text is brand green when on Donate page === */
+.menuitem .donate.small[aria-current="page"],
+.menuitem .donate.small.active,
+.donate.small[aria-current="page"],
+.donate.small.active{
+  color: var(--brand) !important;
+}
+
+/* Donate pill readability when active */
+.btn-accent.donate-small[aria-current="page"],
+.donate-small.active,
+.donate-small[aria-current="page"]{
+  color: var(--brand) !important;
+}

@@ -1,0 +1,1379 @@
+/*
+ * Global stylesheet for the Nature Canada website redesign.
+ *
+ * This style sheet defines a modern, accessible visual language
+ * inspired by Canada's wilderness. It uses a restrained colour
+ * palette, generous spacing and responsive layouts to deliver
+ * a professional yet inviting experience on any device. All
+ * components include sensible defaults for colour contrast and
+ * interactive states to meet WCAG 2.1 AA requirements.
+ */
+
+/* -------- Root and base styles -------- */
+/*  */
+html {
+  box-sizing: border-box;
+  /* Ensure the viewport is treated correctly on mobile devices */
+  scroll-behavior: smooth;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family: var(--body-font);
+  /* Increase the base font size to improve readability and give the layout
+   * a more contemporary feel. Larger text combined with generous
+   * white space helps emulate the airy aesthetic of modern portfolio sites. */
+  font-size: 20px;
+  line-height: 1.7;
+  color: var(--text-dark);
+  background-color: #f7f9f8;
+}
+
+/* Colour variables for easy theming */
+:root {
+  /*
+   * Colour palette
+   *
+   * These variables define the core palette for the site. The primary and secondary
+   * colours are inspired by evergreen forests and clear northern lakes. A warm
+   * accent colour draws attention to calls to action. Additional variables
+   * specify contrasting text and surfaces and set a maximum layout width.
+   */
+  --primary-color: #0a5231;
+  --secondary-color: #0f776e;
+  --accent-color: #d6a21a;
+  --light-bg: #ffffff;
+  --dark-bg: #0d2421;
+  --text-light: #f7f9f8;
+  --text-dark: #2a2a2a;
+  --max-width: 1400px;
+
+  /* Section backgrounds
+   * Light background used for alternating sections to add contrast
+   * and emulate modern single‑page websites with clear segmentation. */
+  --section-light: #f7f9f8;
+
+  /*
+   * Typography
+   *
+   * Use modern, legible typefaces for a contemporary feel. Poppins is used
+   * for headings to provide strong character and clean lines, while Open Sans
+   * serves as the primary body font for excellent readability. Fallback
+   * system fonts ensure graceful degradation if the web fonts fail to load.
+   */
+  --heading-font: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+  --body-font: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Utility classes */
+.container {
+  width: 90%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1, h2, h3, h4 {
+  margin-top: 0;
+  font-family: var(--heading-font);
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1.2;
+}
+h1 {
+  /* Oversized headings create a striking visual hierarchy reminiscent
+   * of the example sites. */
+  font-size: 5rem;
+}
+h2 {
+  font-size: 3rem;
+}
+h3 {
+  font-size: 2rem;
+}
+h4 {
+  font-size: 1.75rem;
+}
+p {
+  margin-bottom: 1rem;
+}
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
+/* Center card headings */
+.card h1,
+.card h2,
+.card h3,
+.card h4 {
+  text-align: center !important;
+}
+
+
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  border-radius: 999px; /* pill shaped buttons */
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  border: 2px solid transparent;
+}
+.btn-primary {
+  background-color: #005B2E !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border-color: #005B2E !important;
+  border-radius: 6px !important; /* Less rounded for modern feel */
+  padding: 10px 20px !important;
+  font-size: 1rem !important;
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #083d25;
+  border-color: #083d25;
+  transform: scale(1.05);
+}
+.btn-secondary {
+  background-color: transparent;
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+.btn-secondary:hover, .btn-secondary:focus {
+  background-color: var(--secondary-color);
+  color: var(--text-light);
+  border-color: var(--secondary-color);
+  transform: scale(1.05);
+}
+.btn-accent {
+  background-color: var(--accent-color);
+  color: var(--text-light);
+  border-color: var(--accent-color);
+}
+.btn-accent:hover, .btn-accent:focus {
+  background-color: #d6a21a;
+  border-color: #b58a17;
+  transform: scale(1.05);
+}
+
+/* Navigation bar */
+header {
+  /* Use a light header to align with the airy, minimalist aesthetic. A subtle
+   * shadow distinguishes it from the page content without adding heaviness. */
+  background-color: var(--light-bg);
+  color: var(--primary-color);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  /* Smoothly animate background and text colour changes when toggling
+     between transparent and solid states on scroll. */
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+nav li {
+  margin-left: 2rem;
+}
+nav a {
+  /* Dark text in the navigation contrasts with the light header. */
+  color: var(--primary-color);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+  position: relative;
+  padding-bottom: 0.25rem;
+}
+nav a:hover, nav a:focus {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+/* Highlight the current page in the navigation using the aria-current attribute.
+   The accent underline provides a modern, unobtrusive indicator while the
+   colour shift matches the brand palette. */
+nav a[aria-current="page"] {
+  color: var(--accent-color);
+  font-weight: 700;
+}
+nav a[aria-current="page"]::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-color);
+  border-radius: 2px;
+}
+/* Hamburger button for small screens */
+.nav-toggle {
+  /* Hide the toggle by default. It becomes visible on smaller screens via
+     a media query. The button itself is unstyled here; we build the
+     hamburger icon using pseudo‑elements further down. Removing the
+     default font sizing ensures the button doesn’t inadvertently display
+     an empty glyph when the icon is drawn with CSS. */
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 24px;
+  position: relative;
+  padding: 0;
+}
+
+/* Build the hamburger icon using pseudo‑elements. Three bars are drawn and
+   animated into a cross when the button has the `.open` class applied. */
+.nav-toggle::before,
+.nav-toggle::after,
+.nav-toggle span {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary-color);
+  transition: transform 0.3s ease, top 0.3s ease, bottom 0.3s ease, opacity 0.3s ease;
+}
+.nav-toggle::before { top: 0; }
+.nav-toggle span    { top: 50%; transform: translateY(-50%); }
+.nav-toggle::after  { bottom: 0; }
+
+/* When the menu is open the bars rotate into a cross and the middle bar disappears */
+.nav-toggle.open::before {
+  transform: rotate(45deg);
+  top: 50%;
+}
+.nav-toggle.open::after {
+  transform: rotate(-45deg);
+  bottom: 50%;
+}
+.nav-toggle.open span {
+  opacity: 0;
+}
+
+/* Transparent header state
+   When the header has the `.transparent` class (applied via JavaScript), the
+   background becomes transparent and the text turns light so it can be read
+   over the hero image. The box shadow is removed to blend seamlessly. */
+header.transparent {
+  /* Use a semi-transparent version of the light background when scrolled.
+     This softens the bar without making it completely invisible. */
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: none;
+}
+
+/* Hero section */
+.hero {
+  position: relative;
+  /*
+   * The hero occupies most of the viewport on desktop for maximum impact.
+   * A full‑bleed background image combined with a semi‑transparent gradient
+   * creates depth while ensuring text remains readable. Flexbox centers
+   * the content both vertically and horizontally.
+   */
+  /* Make the hero fill nearly the entire viewport for a dramatic introduction. */
+  min-height: 95vh;
+  background-image: url('hero.png');
+  background-size: cover;
+  background-position: center;
+  /* Create a subtle parallax effect by fixing the background relative to
+   * the viewport. On some mobile browsers this property is ignored but
+   * gracefully falls back. */
+  background-attachment: fixed;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Decorative wave divider that separates the hero from subsequent sections.
+   The SVG is full width and scales responsively. */
+.wave-divider {
+  line-height: 0;
+  position: relative;
+  top: -2px;
+}
+.wave-divider svg {
+  display: block;
+  width: 100%;
+  height: 100px;
+}
+
+/* Light section backgrounds */
+.section-light {
+  background-color: var(--section-light);
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Soften the hero overlay to let the underlying artwork show through. */
+  background: linear-gradient(rgba(10, 82, 49, 0.5), rgba(15, 119, 110, 0.5));
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  padding: 2rem;
+}
+.hero h1 {
+  font-size: 6rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-light);
+}
+.hero p {
+  font-size: 1.75rem;
+  color: var(--text-light);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero .btn-group {
+  margin-top: 4rem;
+}
+.btn-group .btn + .btn {
+  margin-left: 1rem;
+}
+
+/* Icon circle for modern card designs */
+.icon-circle {
+  /* Enlarge icon circles for greater emphasis on each feature. */
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--secondary-color);
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Ensure icons inside icon-circle are visible */
+.icon-circle i {
+  display: block;
+}
+
+/* Secondary buttons in the hero section invert colours for better contrast
+   against the dark background. */
+.hero .btn-secondary {
+  color: var(--text-light);
+  border-color: var(--text-light);
+  background-color: rgba(255,255,255,0.1);
+}
+.hero .btn-secondary:hover,
+.hero .btn-secondary:focus {
+  background-color: var(--text-light);
+  color: var(--secondary-color);
+  border-color: var(--text-light);
+}
+
+/* Scroll down arrow
+   A subtle scroll indicator encourages visitors to move down the page. The
+   arrow is positioned at the bottom of the hero and animated with a
+   gentle bounce to draw the eye without being intrusive. */
+.scroll-down {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: var(--text-light);
+  animation: scroll-bounce 2s infinite;
+  cursor: pointer;
+  z-index: 1;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 10px); }
+}
+
+
+/* Sections */
+section {
+  /* Increase section spacing to create generous white space between
+   * content groups, echoing the minimalist layouts of the example sites. */
+  padding: 8rem 0;
+}
+
+/* Alternate section backgrounds for subtle visual rhythm */
+/* Remove alternating backgrounds to maintain a clean, uninterrupted flow */
+section:nth-of-type(even):not(.hero):not(.cta) {
+  background-color: transparent;
+}
+
+/* Mission/About section */
+.mission {
+  background-color: var(--light-bg);
+  text-align: center;
+}
+.mission h2 {
+  margin-bottom: 1rem;
+}
+.mission p {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Card grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+.card {
+  /* Elevated card styling for a sleek, modern look. Each card is a
+   * self‑contained panel with a light surface, generous padding and
+   * smooth transitions. The subtle shadow lifts the card off the page
+   * without overwhelming the design. */
+  background: var(--light-bg);
+  border: 1px solid #e3e8e5;
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+  /* Enable a 3D perspective on the card itself. This allows the
+   * JavaScript tilt effect to create a sense of depth when the user
+   * moves their cursor over the card. Without a perspective the
+   * rotation would be applied relative to the page, making the effect
+   * less convincing. See script.js for the interactive tilt logic. */
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+.card:hover, .card:focus-within {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+.card p {
+  flex: 1 1 auto;
+  color: var(--text-dark);
+  text-align: center;
+}
+.card a.btn {
+  margin-top: 1rem;
+}
+
+/* News section */
+.news-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 3rem;
+}
+.news-item {
+  /* Present each news item as a raised panel similar to the feature cards. */
+  background: var(--light-bg);
+  border: 1px solid #e3e8e5;
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+  /* Add perspective to news items so they participate in the 3D tilt
+   * effect defined in script.js. */
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Elevate the news card on hover for interactivity */
+.news-item:hover, .news-item:focus-within {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.news-item h4 {
+  margin-top: 0;
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+.news-item .date {
+  /* Increase date prominence and add subtle typographic details. */
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #666;
+  margin-bottom: 1rem;
+}
+.news-item p {
+  flex-grow: 1;
+  margin-bottom: 1.5rem;
+}
+
+/* Remove border on last news item to avoid extra line */
+.news-item:last-child {
+  border-bottom: none;
+}
+
+/* Subscribe/Call to action section */
+.cta {
+  background-color: var(--secondary-color);
+  color: var(--text-light);
+  text-align: center;
+  /* Expand the CTA section to give it breathing room and draw the eye. */
+  padding: 6rem 1rem;
+}
+.cta h2 {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+  font-size: 3rem;
+}
+.cta p {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--text-light);
+  font-size: 1.5rem;
+}
+.cta form {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+.cta input[type="email"] {
+  padding: 0.9rem 1.2rem;
+  border-radius: 999px;
+  border: none;
+  min-width: 280px;
+  font-size: 1rem;
+}
+.cta input[type="submit"] {
+  padding: 0.9rem 2rem;
+  border-radius: 999px;
+  border: 2px solid var(--accent-color);
+  background-color: var(--accent-color);
+  color: var(--text-light);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.cta input[type="submit"]:hover {
+  background-color: #b58a17;
+  border-color: #b58a17;
+}
+
+/* Footer */
+footer {
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+  padding: 4rem 1rem;
+}
+
+/*
+ * Reveal animations
+ *
+ * Elements with the `.reveal` class start hidden and slide up
+ * as they enter the viewport. When the `visible` class is added
+ * via IntersectionObserver in script.js, the element fades in
+ * smoothly. Adjust the translateY and transition duration to tweak
+ * the motion.
+ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+footer .footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+footer h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--text-light);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+footer li {
+  margin-bottom: 0.5rem;
+}
+footer a {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+footer a:hover, footer a:focus {
+  color: var(--accent-color);
+}
+footer .social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+footer .social-icons a {
+  color: var(--text-light);
+  font-size: 1.5rem;
+}
+footer .social-icons a:hover {
+  color: var(--accent-color);
+}
+footer .copyright {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+/* Responsive behaviour */
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    /* Use a light background for the mobile dropdown to match the desktop navigation */
+    background-color: var(--light-bg);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 1rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+  nav ul.show {
+    display: flex;
+  }
+  nav li {
+    margin: 0.5rem 0;
+  }
+  .nav-toggle {
+    display: block;
+  }
+}
+
+/* French language link ("FR")
+   A small uppercase link that allows switching to the French version of the site. */
+/* French language link ("FR")
+   Display a language icon followed by the text to mimic the look of the official site.
+   The link appears small and uppercase and sits flush against the rest of the nav items. */
+.fr-link {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  margin-right: 1rem;
+}
+.fr-link i {
+  margin-right: 0.25rem;
+}
+.fr-link:hover,
+.fr-link:focus {
+  color: var(--secondary-color);
+}
+
+/* About page links list */
+.about-links {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.about-links li {
+  margin-bottom: 0.75rem;
+}
+.about-links li a {
+  color: var(--secondary-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+.about-links li a:hover,
+.about-links li a:focus {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+/* Subnavigation styles */
+nav li.has-submenu {
+  position: relative;
+}
+nav li.has-submenu > .submenu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.25rem);
+  background-color: var(--light-bg);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  z-index: 1000;
+}
+nav li.has-submenu:hover > .submenu,
+nav li.has-submenu:focus-within > .submenu {
+  display: block;
+}
+nav li.has-submenu > .submenu li {
+  margin: 0;
+}
+nav li.has-submenu > .submenu li a {
+  display: block;
+  padding: 0.5rem 1.5rem;
+  color: var(--primary-color);
+  white-space: nowrap;
+}
+nav li.has-submenu > .submenu li a:hover,
+nav li.has-submenu > .submenu li a:focus {
+  background-color: var(--section-light);
+  color: var(--secondary-color);
+}
+
+/* Ensure dropdown submenu aligns nicely on small screens */
+@media (max-width: 768px) {
+  nav li.has-submenu > .submenu {
+    position: static;
+    box-shadow: none;
+    background-color: transparent;
+  }
+  nav li.has-submenu > .submenu li a {
+    padding-left: 1rem;
+  }
+}
+
+
+/* === Subnav under-heading bar (added) === */
+.subnav{position:relative;height:0}
+.subnav-inner{
+  position:absolute;left:0;right:0;transform:translateY(-8px);
+  opacity:0;pointer-events:none;transition:transform .18s ease, opacity .18s ease;
+  background-color: var(--secondary-color);
+  color:#fff;border-top:1px solid rgba(255,255,255,.6);
+  box-shadow: 0 10px 24px rgba(0,0,0,.08)
+}
+.subnav.show .subnav-inner{transform:translateY(0);opacity:1;pointer-events:auto}
+.subnav .arrow{
+  position:absolute;top:-9px;width:18px;height:18px;transform:rotate(45deg);
+  background-color: var(--secondary-color);left:var(--arrow-left,0px);
+  border-left:1px solid rgba(255,255,255,.6);border-top:1px solid rgba(255,255,255,.6)
+}
+.subnav .panel{display:none;gap:28px;align-items:center;padding:14px 24px 16px}
+.subnav .panel[aria-hidden="false"]{display:flex}
+.subnav a{color:#fff;text-decoration:none;font-weight:700}
+.subnav a:hover{text-decoration:underline}
+
+/* Small-caps for top-level links (keeps modern feel) */
+nav > ul > li > a{
+  font-variant: small-caps;
+  letter-spacing: .06em;
+}
+
+/* Push FR/Donate to the right */
+nav li.nav-right{margin-left:auto}
+
+/* Smaller donate pill */
+a.donate-small.btn.btn-accent{
+  padding: 8px 14px;
+  font-size: 0.875rem;
+  border-radius: 999px;
+}
+
+/* Logo links home; remove underline */
+.logo{text-decoration:none}
+
+
+/* FORCE override for Donate button in navbar */
+a.donate-small.btn-accent {
+  background-color: #d6a21a !important; /* Dark green */
+  color: #ffffff !important;           /* White text */
+  font-weight: 700 !important;
+  border-color: #005B2E !important;
+}
+
+
+/* Remove underline highlight for Donate button in navbar */
+a.donate-small.btn-accent[aria-current="page"]::after {
+  display: none !important;
+}
+
+
+/* Modernized Donate button style */
+a.donate-small.btn-accent {
+  background-color: #005B2E !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border-color: #005B2E !important;
+  border-radius: 6px !important; /* Less rounded for modern feel */
+  padding: 10px 20px !important;
+  font-size: 1rem !important;
+}
+a.donate-small.btn-accent[aria-current="page"]::after {
+  display: none !important;
+}
+
+
+/* Modernize Donate button in the donation form */
+.donation-form button {
+  border-radius: 6px !important;
+}
+
+/* Modernize Donate button in the footer */
+footer .btn.btn-accent {
+  border-radius: 6px !important;
+}
+
+
+/* Match subnav link style to top-level nav */
+.subnav a {
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+}
+
+/* Make subnav background slightly transparent */
+.subnav-inner {
+  background-color: rgba(15, 119, 110, 0.95) !important; /* var(--secondary-color) with transparency */
+}
+.subnav .arrow {
+  background-color: rgba(15, 119, 110, 0.95) !important;
+}
+
+
+/* Modern rectangular Learn More buttons in cards */
+.card .btn.learn-more {
+  border-radius: 6px !important;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-block;
+  margin-top: 1.5rem;
+}
+
+
+.card .btn.learn-more {
+  border-radius: 6px !important;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-block;
+  margin-top: 1.5rem;
+}
+
+
+.card .btn.learn-more {
+  border-radius: 6px !important;
+  padding: 10px 20px !important;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: var(--secondary-color);
+  border: 2px solid var(--secondary-color);
+  background: transparent;
+}
+.card .btn.learn-more:hover {
+  background: var(--secondary-color);
+  color: var(--text-light);
+}
+
+
+/* Modern Learn More buttons styled like Donate */
+.card .learn-more-btn {
+  background-color: #005B2E !important;
+  color: #ffffff !important;
+  border: 2px solid #005B2E !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+  padding: 10px 20px !important;
+  display: inline-block;
+  margin-top: 1.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.card .learn-more-btn:hover,
+.card .learn-more-btn:focus {
+  background-color: #083d25 !important;
+  color: #ffffff !important;
+  transform: scale(1.05);
+}
+
+
+/* Learn More button tweaks: white background, green border, green text, no underline */
+.card .learn-more-btn {
+  background-color: #ffffff !important;
+  color: #005B2E !important;
+  border: 2px solid #005B2E !important;
+  text-decoration: none !important;
+}
+.card .learn-more-btn:hover,
+.card .learn-more-btn:focus {
+  background-color: #005B2E !important;
+  color: #ffffff !important;
+}
+
+
+/* Update Learn More button to use teal green */
+.card .learn-more-btn {
+  background-color: #ffffff !important;
+  color: #0f776e !important;
+  border: 2px solid #0f776e !important;
+}
+.card .learn-more-btn:hover,
+.card .learn-more-btn:focus {
+  background-color: #0f776e !important;
+  color: #ffffff !important;
+}
+
+
+/* Unified learn‑more style */
+.learn-more-btn {
+  background-color: #ffffff !important;
+  color: #0f776e !important;
+  border: 2px solid #0f776e !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+  padding: 10px 20px !important;
+  display: inline-block;
+  margin-top: 1.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  text-decoration: none !important;
+}
+.learn-more-btn:hover,
+.learn-more-btn:focus {
+  background-color: #0f776e !important;
+  color: #ffffff !important;
+  transform: scale(1.05);
+}
+
+
+/* Modern rectangular style for CTA Sign Up button */
+.cta input[type="submit"],
+.cta button[type="submit"],
+.cta .cta-submit {
+  border-radius: 6px !important;
+  background-color: #d6a21a
+ !important;
+  color:  #ffffff!important;
+  border: 2px solid #0f776e !important;
+  font-weight: 700 !important;
+  padding: 10px 24px !important;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.cta input[type="submit"]:hover,
+.cta button[type="submit"]:hover,
+.cta .cta-submit:hover,
+.cta input[type="submit"]:focus,
+.cta button[type="submit"]:focus,
+.cta .cta-submit:focus {
+  background-color: #d6a21a !important;
+  color: #ffffff !important;
+  transform: scale(1.05);
+}
+
+
+/* Standard CTA Sign Up Button */
+.cta input[type="submit"],
+.cta button[type="submit"] {
+  background-color: var(--accent-color) !important;
+  color: #ffffff !important;
+ 
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+  padding: 10px 24px !important;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.cta input[type="submit"]:hover,
+.cta button[type="submit"]:hover,
+.cta input[type="submit"]:focus,
+.cta button[type="submit"]:focus {
+  background-color: #b58a17 !important;
+  transform: scale(1.05);
+}
+
+
+/* Quick Links no underline */
+footer a,
+footer a:visited,
+footer a:hover,
+footer a:focus {
+  text-decoration: none !important;
+}
+
+
+/* Hero buttons unified style */
+.hero .btn-primary,
+.hero .btn-secondary {
+  background-color: #ffffff !important;
+  color: #0f776e !important;
+  border: 2px solid #0f776e !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+  padding: 12px 32px !important;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.hero .btn-primary:hover,
+.hero .btn-secondary:hover,
+.hero .btn-primary:focus,
+.hero .btn-secondary:focus {
+  background-color: #0f776e !important;
+  color: #ffffff !important;
+  transform: scale(1.05);
+}
+
+
+/* Remove underline on hero buttons */
+.hero .btn-primary,
+.hero .btn-secondary,
+.hero .btn-primary:hover,
+.hero .btn-secondary:hover,
+.hero .btn-primary:focus,
+.hero .btn-secondary:focus {
+  text-decoration: none !important;
+}
+
+
+/* Remove underline from Learn‑More section links */
+.learn-more-section a,
+.learn-more-section a:visited,
+.learn-more-section a:hover,
+.learn-more-section a:focus,
+.about-links a,
+.about-links a:visited,
+.about-links a:hover,
+.about-links a:focus {
+  text-decoration: none !important;
+}
+
+/* Unified rectangular button style */
+.learn-more-btn {
+  background-color: #ffffff !important;
+  color: #0f776e !important;
+  border: 2px solid #0f776e !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+  padding: 10px 24px !important;
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  text-decoration: none !important;
+}
+.learn-more-btn:hover,
+.learn-more-btn:focus {
+  background-color: #0f776e !important;
+  color: #ffffff !important;
+  transform: scale(1.05);
+}
+
+
+/* Footer “Support” button – keep text white in all states */
+footer .btn.btn-accent,
+footer .btn.btn-accent:hover,
+footer .btn.btn-accent:focus {
+  color: #ffffff !important;
+}
+
+
+/* Remove underline from site logo on hover/focus */
+.logo,
+.logo:hover,
+.logo:focus,
+.logo:visited {
+  text-decoration: none !important;
+}
+
+
+/* Remove underline from active/hovered navigation links */
+nav a,
+nav a:hover,
+nav a:focus,
+nav a[aria-current="page"],
+nav a[aria-current="page"]:hover,
+nav a[aria-current="page"]:focus,
+.subnav a,
+.subnav a:hover,
+.subnav a:focus {
+  text-decoration: none !important;
+}
+/* Hide ::after underline indicator */
+nav a[aria-current="page"]::after,
+nav a:hover::after,
+nav a:focus::after {
+  display: none !important;
+}
+
+
+footer .social-icons a svg {
+  fill: #ffffff;
+  width: 24px;
+  height: 24px;
+  transition: fill 0.3s ease;
+}
+footer .social-icons a:hover svg,
+footer .social-icons a:focus svg {
+  fill: var(--accent-color);
+}
+
+
+/* Highlight active nav link in accent colour */
+nav a.current-page {
+  color: var(--accent-color) !important;
+}
+
+/* --------------------------------------------------------------------
+ * Responsive design improvements
+ *
+ * These media queries adjust typography, spacing, layout and controls
+ * to ensure the site remains usable and attractive on tablets and phones.
+ * They reduce oversize headings, stack multi‑column grids, relax spacing
+ * and adjust the hero height and call‑to‑action forms for narrow viewports.
+ -------------------------------------------------------------------- */
+
+/* Medium screens (≤ 992px) */
+@media (max-width: 992px) {
+  body {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  h1 { font-size: 4rem; }
+  h2 { font-size: 2.5rem; }
+  h3 { font-size: 1.75rem; }
+  h4 { font-size: 1.5rem; }
+  .hero {
+    min-height: 80vh;
+    padding: 4rem 0;
+  }
+  .hero h1 { font-size: 4rem; }
+  .hero p { font-size: 1.5rem; }
+}
+
+/* Small screens (≤ 768px) */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  h1 { font-size: 3rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.5rem; }
+  h4 { font-size: 1.25rem; }
+  .hero {
+    min-height: 70vh;
+    background-attachment: scroll;
+    padding: 3rem 0;
+  }
+  .hero h1 { font-size: 3rem; }
+  .hero p { font-size: 1.25rem; }
+  .btn-group .btn + .btn {
+    margin-left: 0.5rem;
+  }
+  /* Stack the newsletter sign‑up form vertically */
+  .cta form {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .cta input[type="email"],
+  .cta input[type="submit"] {
+    width: 100%;
+  }
+  /* Ensure card and news grids collapse to a single column */
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  .news-list {
+    grid-template-columns: 1fr;
+  }
+  /* Allow the nav container to wrap its contents */
+  .nav-container {
+    flex-wrap: wrap;
+  }
+}
+
+/* Extra small screens (≤ 480px) */
+@media (max-width: 480px) {
+  .hero h1 { font-size: 2.5rem; }
+  .hero p { font-size: 1.1rem; }
+}
+
+
+/* === Mobile stacking for every .form-grid === */
+@media (max-width:600px){
+  .form-grid{
+    /* If it was flex‑row, switch to column */
+    flex-direction:column !important;
+
+    /* If it was CSS Grid with 2 columns, collapse to one */
+    grid-template-columns:1fr !important;
+
+    /* Force children to full width */
+    display:block !important;
+  }
+  .form-grid > *{
+    width:100% !important;
+    margin-bottom:1rem;
+  }
+}
+
+
+
+/* ===========================================================
+   Responsive typography & alignment tweaks (phones & tablets)
+   =========================================================== */
+@media (max-width:992px){
+  body{font-size:18px;}
+  h1{font-size:4rem;}
+  h2{font-size:2.75rem;}
+  h3{font-size:1.75rem;}
+  .hero h1{font-size:4.5rem;}
+  .hero p{font-size:1.5rem;text-align:center;}
+  section h2{text-align:center;}
+}
+
+@media (max-width:600px){
+  body{font-size:16px;}
+  h1{font-size:2.75rem;}
+  h2{font-size:2.25rem;}
+  h3{font-size:1.5rem;}
+  .hero h1{font-size:3.5rem;}
+  .hero p{font-size:1.25rem;text-align:center;}
+  .card h3{font-size:1.75rem;text-align:center;}
+  .card p{text-align:center;}
+  footer{font-size:0.85rem;}
+}
+
+
+
+/* Highlight active sub‑nav link */
+.subnav a.current-page{
+  color: var(--accent-color) !important;
+}
+
+
+
+/* Logo image sizing */
+.logo img{
+  height:48px;
+  width:auto;
+  display:block;
+}
+
+
+
+
+header .logo img{
+  height:56px;                   /* scale logo accordingly */
+}
+
+
+
+/* === Consistent larger nav bar height (applies to regular & transparent) === */
+header .nav-container,
+header.transparent .nav-container{
+  padding:1.25rem 0 !important;
+}
+header .logo img{
+  height:56px;
+  width:auto;
+}
+
+
+
+/* === Mobile / Tablet form stacking (≤768px) === */
+@media (max-width:768px){
+  .form-grid,
+  .form-row{
+    display:block !important;
+    grid-template-columns:1fr !important;
+  }
+  .form-grid > *,
+  .form-row > *{
+    width:100% !important;
+    margin-bottom:1rem;
+  }
+}
+
+
+
+/* === Fix: Remove faint dividing line under header/menu on small screens === */
+/* This overrides subtle shadows/borders that show as a hairline when the mobile menu is open. */
+@media (max-width: 900px){
+  header{ box-shadow: none !important; }
+  nav ul{ box-shadow: none !important; border: none !important; }
+  .subnav-inner{ border-top: none !important; box-shadow: none !important; }
+  .subnav .arrow{ border: 0 !important; }
+  .menu, .menu *, .mobile-menu, .mobile-menu *{ outline: 0 !important; }
+  hr{ display: none !important; }
+}
+
+
+/* === Responsive: hide sub links on phone/tablet === */
+@media (max-width: 1024px){
+  /* Hide the horizontal subnav bar entirely */
+  .subnav,
+  .subnav-inner,
+  .subnav .panel,
+  .subnav .arrow{
+    display: none !important;
+  }
+
+  /* Hide dropdown submenus inside the mobile nav */
+  nav li.has-submenu > .submenu{
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Ensure no spacing from a hidden subnav */
+  header + .subnav{ display:none !important; }
+}
